@@ -1,0 +1,8 @@
+import { report } from "Study"
+
+import S from "@/String"
+
+
+
+report(S.capitalize, "capitalize", [#["", ""], #["awesome", "Awesome"], #["x", "X"]])
+report(S.uncapitalize, "capitalize", [#["", ""], #["Awesome", "awesome"], #["X", "x"], #["x", "x"]])

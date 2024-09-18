@@ -1,0 +1,120 @@
+import { identity } from "Function"
+import String from "String"
+
+import { capitalize, uncapitalize } from "@/String"
+
+
+
+export capitalize
+export uncapitalize
+
+export alias Consumer = String -> List String
+export alias Producer = List String -> String
+
+export type Translate = Translate(Consumer, Producer)
+
+export create = Translate
+
+consume :: Translate -> String -> List String
+export consume = (o, x) => where(o) {
+  Translate(eat, _) =>
+    eat(x)
+}
+produce :: Translate -> List String -> String
+export produce = (o, x) => where(o) {
+  Translate(_, barf) =>
+    barf(x)
+}
+
+convert :: Translate -> String -> String
+export convert = (o, x) => where(o) {
+  Translate(eat, barf) =>
+    pipe(
+      eat,
+      barf,
+    )(x)
+}
+
+helper :: (String -> String) -> (String -> List String -> String) -> List String -> String
+export helper = (m1, m2, x) => where(x) {
+  [a, ...z] =>
+    m2(m1(a), z)
+
+  [] =>
+    ""
+}
+
+words = String.split(" ")
+unwords = String.join(" ")
+
+joinMany = (del, a, z) => pipe(
+  String.join(del),
+  mappend(a ++ del),
+)(z)
+
+capitalizeRest = (a, z) => pipe(
+  map(capitalize),
+  joinMany("", a),
+)(z)
+
+export get = {
+  sentence: words,
+  camel: pipe(
+    String.replace("([A-Z])", " $1"),
+    words,
+  ),
+  snake: String.split("_"),
+  dot: String.split("."),
+  path: String.split("/"),
+  kebab: String.split("-"),
+}
+export set = {
+  space: unwords,
+  camel: helper(String.toLower, capitalizeRest),
+  sentence: helper(
+    capitalize,
+    (a, z) => pipe(
+      map(String.toLower),
+      joinMany(" ", a),
+    )(z),
+  ),
+  snake: helper(
+    String.toLower,
+    (a, z) => pipe(
+      map(String.toLower),
+      joinMany("_", a),
+    )(z),
+  ),
+  capital: helper(
+    capitalize,
+    (a, z) => pipe(
+      map(capitalize),
+      joinMany(" ", a),
+    )(z),
+  ),
+  constant: helper(
+    String.toUpper,
+    (a, z) => pipe(
+      map(String.toUpper),
+      joinMany("_", String.toUpper(a)),
+    )(z),
+  ),
+  dot: helper(identity, joinMany(".")),
+  kebab: helper(identity, joinMany("-")),
+  pascal: helper(capitalize, capitalizeRest),
+  pascalSnake: helper(
+    capitalize,
+    (a, z) => pipe(
+      map(capitalize),
+      joinMany("_", a),
+    )(z),
+  ),
+  path: helper(identity, joinMany("/")),
+  train: helper(
+    capitalize,
+    (a, z) => pipe(
+      map(capitalize),
+      joinMany("-", a),
+    )(z),
+  ),
+}

@@ -1,0 +1,82 @@
+import { identity } from "Function"
+import String from "String"
+
+import { caseN2, caseN3, report } from "Study"
+
+import Ortho from "@/Orthography"
+import S from "@/String"
+
+
+
+fromSentence = Ortho.create(Ortho.get.sentence)
+
+sentenceTo = {
+  camel: fromSentence(Ortho.set.camel),
+  capital: fromSentence(Ortho.set.capital),
+  constant: fromSentence(Ortho.set.constant),
+  dot: fromSentence(Ortho.set.dot),
+  pascal: fromSentence(Ortho.set.pascal),
+  pascalSnake: fromSentence(Ortho.set.pascalSnake),
+  sentence: fromSentence(Ortho.set.sentence),
+  snake: fromSentence(Ortho.set.snake),
+  train: fromSentence(Ortho.set.train),
+}
+
+report(
+  caseN2(Ortho.convert),
+  "convert",
+  [
+    #[#[sentenceTo.camel, "skibble dibble scapple dapple"], "skibbleDibbleScappleDapple"],
+    #[#[sentenceTo.camel, ""], ""],
+    #[#[sentenceTo.capital, "hey watch out"], "Hey Watch Out"],
+    #[#[sentenceTo.constant, "please remove shoes"], "PLEASE_REMOVE_SHOES"],
+    #[#[sentenceTo.dot, "v0 0 1"], "v0.0.1"],
+    #[#[sentenceTo.pascal, "Mit tag essen"], "MitTagEssen"],
+    #[#[sentenceTo.pascalSnake, "Slither slather snicker snack"], "Slither_Slather_Snicker_Snack"],
+    #[#[sentenceTo.sentence, "Real Cool Forever"], "Real cool forever"],
+    #[#[sentenceTo.snake, "Real Cool Forever"], "real_cool_forever"],
+    #[#[sentenceTo.train, "king kong ain't got shit on me"], "King-Kong-Ain't-Got-Shit-On-Me"],
+  ],
+)
+
+toConstant = Ortho.create($, Ortho.set.constant)
+
+toConst = {
+  camel: toConstant(Ortho.get.camel),
+  dot: toConstant(Ortho.get.dot),
+  snake: toConstant(Ortho.get.snake),
+  path: toConstant(Ortho.get.path),
+  kebab: toConstant(Ortho.get.kebab),
+}
+
+report(
+  caseN2(Ortho.convert),
+  "convert - from",
+  [
+    #[#[toConst.camel, "hollyGoLightly"], "HOLLY_GO_LIGHTLY"],
+    #[#[toConst.dot, "1.2.3.4"], "1_2_3_4"],
+    #[#[toConst.snake, "hey_there_variable"], "HEY_THERE_VARIABLE"],
+    #[#[toConst.path, "abra/ka/dabra"], "ABRA_KA_DABRA"],
+    #[#[toConst.kebab, "onion-beef-tomato"], "ONION_BEEF_TOMATO"],
+  ],
+)
+
+report(
+  Ortho.helper((x) => x ++ x, (a, b) => a ++ String.join("->", b)),
+  "helper",
+  [#[["hey", "there", "what's", "up"], "heyheythere->what's->up"], #[[""], ""], #[[], ""]],
+)
+
+banana = Ortho.create(String.split("a"), String.join("a"))
+
+report(
+  Ortho.consume(banana),
+  "consume",
+  [#["banana commandant", ["b", "n", "n", " comm", "nd", "nt"]]],
+)
+
+report(
+  Ortho.produce(banana),
+  "produce",
+  [#[["b", "n", "n", " comm", "nd", "nt"], "banana commandant"]],
+)

@@ -1,0 +1,15 @@
+import String from "String"
+
+
+
+export sliceToEnd = (i, x) => String.slice(i, String.length(x), x)
+
+modifyFirstLetter = (fn, str) => pipe(
+  String.slice(0, 1),
+  fn,
+  mappend($, sliceToEnd(1, str)),
+)(str)
+
+export capitalize = modifyFirstLetter(String.toUpper)
+
+export uncapitalize = modifyFirstLetter(String.toLower)
