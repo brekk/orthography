@@ -1,4 +1,5 @@
-import { identity } from "Function"
+import { always, identity, ifElse, unless } from "Function"
+import List from "List"
 import String from "String"
 
 import { capitalize, uncapitalize } from "@/String"
@@ -35,10 +36,11 @@ export convert = (o, x) => where(o) {
     )(x)
 }
 
+
 helper :: (String -> String) -> (String -> List String -> String) -> List String -> String
 export helper = (m1, m2, x) => where(x) {
   [a, ...z] =>
-    m2(m1(a), z)
+    ifElse(List.isEmpty, always(m1(a)), m2(m1(a)))(z)
 
   [] =>
     ""
@@ -49,7 +51,7 @@ unwords = String.join(" ")
 
 joinMany = (del, a, z) => pipe(
   String.join(del),
-  mappend(a ++ del),
+  unless(String.isEmpty, mappend(a ++ del)),
 )(z)
 
 capitalizeRest = (a, z) => pipe(

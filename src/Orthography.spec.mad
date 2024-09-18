@@ -28,10 +28,13 @@ report(
   [
     #[#[sentenceTo.camel, "skibble dibble scapple dapple"], "skibbleDibbleScappleDapple"],
     #[#[sentenceTo.camel, ""], ""],
+    #[#[sentenceTo.camel, "zorp"], "zorp"],
     #[#[sentenceTo.capital, "hey watch out"], "Hey Watch Out"],
     #[#[sentenceTo.constant, "please remove shoes"], "PLEASE_REMOVE_SHOES"],
+    #[#[sentenceTo.constant, "swash"], "SWASH"],
     #[#[sentenceTo.dot, "v0 0 1"], "v0.0.1"],
     #[#[sentenceTo.pascal, "Mit tag essen"], "MitTagEssen"],
+    #[#[sentenceTo.pascal, "yissss"], "Yissss"],
     #[#[sentenceTo.pascalSnake, "Slither slather snicker snack"], "Slither_Slather_Snicker_Snack"],
     #[#[sentenceTo.sentence, "Real Cool Forever"], "Real cool forever"],
     #[#[sentenceTo.snake, "Real Cool Forever"], "real_cool_forever"],
