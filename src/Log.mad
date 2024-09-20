@@ -1,0 +1,19 @@
+import PB from "PartyBus"
+
+
+
+export TAGS = {
+  pairs: PB.tagWithScope("ortho", ["pairs"]),
+  pairsValidate: PB.tagWithScope("ortho", ["pairs", "validate"]),
+  convert: PB.tagWithScope("ortho", ["convert"]),
+  info: PB.tagWithScope("ortho", ["info"]),
+  detail: PB.tagWithScope("ortho", ["detail"]),
+}
+
+export log = {
+  pairs: PB.env(TAGS.pairs),
+  pairsValidate: PB.env(TAGS.pairsValidate),
+  convert: PB.env(TAGS.convert),
+  info: PB.env(TAGS.info),
+  detail: PB.env(TAGS.detail),
+}

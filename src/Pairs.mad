@@ -1,0 +1,32 @@
+import { equals } from "Function"
+
+import { get, set } from "@/Convert"
+import { log } from "@/Log"
+
+
+
+export type ReversiblePair a b = Pair(a -> b, b -> a)
+
+export validate = (pair, x) => where(pair) {
+  Pair(getter, setter) =>
+    pipe(
+      log.pairsValidate("input"),
+      getter,
+      log.pairsValidate("get"),
+      setter,
+      log.pairsValidate("set"),
+      equals(x),
+    )(x)
+}
+
+export camel = Pair(get.camel, set.camel)
+export constant = Pair(get.constant, set.constant)
+export dot = Pair(get.dot, set.dot)
+export kebab = Pair(get.kebab, set.kebab)
+export pascal = Pair(get.pascal, set.pascal)
+export pascalSnake = Pair(get.pascalSnake, set.pascalSnake)
+export path = Pair(get.path, set.path)
+export sentence = Pair(get.sentence, set.sentence)
+export snake = Pair(get.snake, set.snake)
+export space = Pair(get.space, set.space)
+export train = Pair(get.train, set.train)
