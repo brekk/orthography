@@ -1,0 +1,26 @@
+import { caseN2, report } from "Study"
+
+import Joiners from "@/Joiners"
+
+
+
+report(
+  caseN2(Joiners.structure),
+  "structure",
+  [
+    #[#[Joiners.camel, ["alpha", "beta", "gamma"]], "alphaBetaGamma"],
+    #[#[Joiners.camel, []], ""],
+    #[#[Joiners.camel, ["one"]], "one"],
+    #[#[Joiners.constant, ["hey", "pay", "attention"]], "HEY_PAY_ATTENTION"],
+    #[#[Joiners.sentence, ["Oh", "nice", "cool"]], "Oh nice cool"],
+    #[#[Joiners.snake, ["Oh", "Hell", "Yeah"]], "oh_hell_yeah"],
+    #[#[Joiners.dot, ["v0", "2", "24"]], "v0.2.24"],
+    #[#[Joiners.kebab, ["a", "b", "c"]], "a-b-c"],
+    #[#[Joiners.path, ["sub", "directory", "file"]], "sub/directory/file"],
+    #[#[Joiners.capital, ["real", "super", "cool"]], "Real Super Cool"],
+    #[#[Joiners.pascal, ["mega", "super", "dope"]], "MegaSuperDope"],
+    #[#[Joiners.pascalSnake, ["Cottonmouth", "black", "mamba"]], "Cottonmouth_Black_Mamba"],
+    #[#[Joiners.train, ["engine", "car", "caboose"]], "Engine-Car-Caboose"],
+    #[#[Joiners.space, ["a", "fine", "how", "do", "ya", "do"]], "a fine how do ya do"],
+  ],
+)

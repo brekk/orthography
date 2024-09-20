@@ -1,0 +1,70 @@
+import { identity } from "Function"
+import { always, ifElse } from "Function"
+import List from "List"
+import { join, toLower, toUpper } from "String"
+
+import { capitalize } from "@/String"
+
+
+
+export type Fusion
+  = Fusion(
+    // delimiter
+    String,
+    // format a
+    String -> String,
+    // format z
+    String -> String,
+  )
+
+structure :: Fusion -> List String -> String
+export structure = (ptrn, strs) => where(#[ptrn, strs]) {
+  #[Fusion(delim, formatA, formatZ), [a, ...z]] =>
+    pipe(
+      ifElse(
+        List.isEmpty,
+        always(""),
+        pipe(
+          map(formatZ),
+          join(delim),
+          mappend(delim),
+        ),
+      ),
+      mappend(formatA(a)),
+    )(z)
+
+  #[_, []] =>
+    ""
+}
+
+// ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚ FUSION PATTERNS
+
+
+export camel = Fusion(
+  "",
+  toLower,
+  pipe(
+    toLower,
+    capitalize,
+  ),
+)
+
+export sentence = Fusion(" ", capitalize, toLower)
+
+_apply = (delim, fn) => Fusion(delim, fn, fn)
+
+export snake = _apply("_", toLower)
+export constant = _apply("_", toUpper)
+
+_joint = _apply($, identity)
+_jointCaps = _apply($, capitalize)
+
+export space = _joint(" ")
+export dot = _joint(".")
+export kebab = _joint("-")
+export path = _joint("/")
+
+export capital = _jointCaps(" ")
+export pascal = _jointCaps("")
+export pascalSnake = _jointCaps("_")
+export train = _jointCaps("-")

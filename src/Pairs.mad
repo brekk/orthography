@@ -1,32 +1,33 @@
+import type { Fusion } from "@/Joiners"
+import type { Fission } from "@/Splitters"
+
 import { equals } from "Function"
 
-import { get, set } from "@/Convert"
+import J from "@/Joiners"
 import { log } from "@/Log"
+import S from "@/Splitters"
 
 
 
-export type ReversiblePair a b = Pair(a -> b, b -> a)
+// export type ReversiblePair = Reversible | Irreversible
+export type Pair = Pair(Fission, Fusion)
+export type Reversible = Reversible(Pair, Pair)
 
-export validate = (pair, x) => where(pair) {
-  Pair(getter, setter) =>
-    pipe(
-      log.pairsValidate("input"),
-      getter,
-      log.pairsValidate("get"),
-      setter,
-      log.pairsValidate("set"),
-      equals(x),
-    )(x)
-}
+// interface Reversible a {
+//   validate :: Pair a -> ReversiblePair
+// }
 
-export camel = Pair(get.camel, set.camel)
-export constant = Pair(get.constant, set.constant)
-export dot = Pair(get.dot, set.dot)
-export kebab = Pair(get.kebab, set.kebab)
-export pascal = Pair(get.pascal, set.pascal)
-export pascalSnake = Pair(get.pascalSnake, set.pascalSnake)
-export path = Pair(get.path, set.path)
-export sentence = Pair(get.sentence, set.sentence)
-export snake = Pair(get.snake, set.snake)
-export space = Pair(get.space, set.space)
-export train = Pair(get.train, set.train)
+// create :: Reversible a => Fission -> Fusion -> Pair a
+// export create = (fizz, fuse) => Pair($, fizz, fuse)
+
+export camel = Pair(S.camel, J.camel)
+export constant = Pair(S.constant, J.constant)
+export dot = Pair(S.dot, J.dot)
+export kebab = Pair(S.kebab, J.kebab)
+export pascal = Pair(S.pascal, J.pascal)
+export pascalSnake = Pair(S.pascalSnake, J.pascalSnake)
+export path = Pair(S.path, J.path)
+export sentence = Pair(S.sentence, J.sentence)
+export snake = Pair(S.snake, J.snake)
+export space = Pair(S.space, J.space)
+export train = Pair(S.train, J.train)

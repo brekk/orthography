@@ -1,0 +1,25 @@
+import { caseN2, report } from "Study"
+
+import Splitters from "@/Splitters"
+
+
+
+report(
+  caseN2(Splitters.destructure),
+  "destructure",
+  [
+    #[#[Splitters.camel, "oneTwoThree"], ["one", "Two", "Three"]],
+    #[#[Splitters.camel, "one"], ["one"]],
+    #[#[Splitters.camel, ""], []],
+    #[#[Splitters.sentence, "Hey there what's up?"], ["Hey", "there", "what's", "up?"]],
+    #[#[Splitters.pascal, "AlphaBetaGamma"], ["Alpha", "Beta", "Gamma"]],
+    #[#[Splitters.pascalSnake, "Zappa_Moon_Unit"], ["Zappa", "Moon", "Unit"]],
+    #[#[Splitters.pascalSnake, "Frank"], ["Frank"]],
+    #[#[Splitters.snake, "nice_cool_awesome"], ["nice", "cool", "awesome"]],
+    #[#[Splitters.constant, "ZIP_ZOP_ZAP"], ["ZIP", "ZOP", "ZAP"]],
+    #[#[Splitters.path, "sub/directory/nice"], ["sub", "directory", "nice"]],
+    #[#[Splitters.dot, "v0.1.2"], ["v0", "1", "2"]],
+    #[#[Splitters.kebab, "a-b-c"], ["a", "b", "c"]],
+    #[#[Splitters.train, "Ex-Why-Zee"], ["Ex", "Why", "Zee"]],
+  ],
+)

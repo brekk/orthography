@@ -1,0 +1,49 @@
+import { reject } from "List"
+import String from "String"
+
+
+
+export type Fission
+  = Fission(
+    // delimiter
+    String,
+    // breaker
+    String -> String -> List String,
+  )
+
+destructure :: Fission -> String -> List String
+export destructure = (prtn, str) => where(prtn) {
+  Fission(delim, breaker) =>
+    pipe(
+      breaker(delim),
+      reject(String.isEmpty),
+    )(str)
+}
+
+// ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚ FISSILE PATTERNS
+
+_split = Fission($, String.split)
+
+
+export space = _split(" ")
+export sentence = space
+
+_splitCapitals = (d, xs) => pipe(
+  String.replace("([A-Z])", `${d}$1`),
+  String.trim,
+  String.split(d),
+)(xs)
+
+export camel = Fission(" ", _splitCapitals)
+export pascal = camel
+export pascalSnake = Fission("_", _splitCapitals)
+
+export snake = _split("_")
+export constant = snake
+
+export path = _split("/")
+
+export dot = _split(".")
+
+export kebab = _split("-")
+export train = kebab

@@ -1,43 +1,52 @@
-import type { ReversiblePair } from "@/Pairs"
+import type { Fusion } from "@/Joiners"
+import type { Pair, Reversible } from "@/Pairs"
+import type { Fission } from "@/Splitters"
 
-import { always, identity, ifElse, unless } from "Function"
-import List from "List"
-import String from "String"
-
-import { Pair } from "@/Pairs"
-import { capitalize, uncapitalize } from "@/String"
-
+import J from "@/Joiners"
+import { Pair, Reversible } from "@/Pairs"
+import S from "@/Splitters"
 
 
-export capitalize
-export uncapitalize
 
-export type Translate a b = Translate(ReversiblePair a b, ReversiblePair b a)
-
-consume :: Translate a b -> a -> b
-export consume = (o, x) => where(o) {
-  Translate(Pair(eat, _), _) =>
-    eat(x)
-}
-produce :: Translate b a -> b -> a
-export produce = (o, x) => where(o) {
-  Translate(_, Pair(_, barf)) =>
-    barf(x)
+export structure = J.structure
+export set = {
+  camel: J.structure(J.camel),
+  sentence: J.structure(J.sentence),
+  snake: J.structure(J.snake),
+  constant: J.structure(J.constant),
+  dot: J.structure(J.dot),
+  kebab: J.structure(J.kebab),
+  path: J.structure(J.path),
+  capital: J.structure(J.capital),
+  pascal: J.structure(J.pascal),
+  pascalSnake: J.structure(J.pascalSnake),
+  train: J.structure(J.train),
 }
 
-export convert = (o, x) => where(o) {
-  Pair(eat, barf) =>
-    pipe(
-      eat,
-      barf,
-    )(x)
+export destructure = S.destructure
+export get = {
+  space: S.destructure(S.space),
+  sentence: S.destructure(S.sentence),
+  camel: S.destructure(S.camel),
+  pascal: S.destructure(S.pascal),
+  snake: S.destructure(S.snake),
+  constant: S.destructure(S.constant),
+  path: S.destructure(S.path),
+  dot: S.destructure(S.dot),
+  kebab: S.destructure(S.kebab),
+  train: S.destructure(S.train),
 }
 
-// convert :: Translate a b -> a -> a
-export paired = (o, x) => where(o) {
-  Translate(Pair(eat, _), Pair(_, barf)) =>
-    pipe(
-      eat,
-      barf,
-    )(x)
+convert :: Fission -> Fusion -> String -> String
+export convert = (split, join, x) => pipe(
+  destructure(split),
+  structure(join),
+)(x)
+
+export alias Translation = { translateFrom :: String -> String, translateTo :: String -> String }
+
+translate :: Reversible -> Translation
+export translate = (t) => where(t) {
+  Reversible(Pair(aSplit, aJoin), Pair(bSplit, bJoin)) =>
+    ({ translateTo: convert(aSplit, bJoin), translateFrom: convert(bSplit, aJoin) })
 }
