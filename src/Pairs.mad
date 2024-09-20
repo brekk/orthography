@@ -1,10 +1,12 @@
 import type { Fusion } from "@/Joiners"
 import type { Fission } from "@/Splitters"
 
-import { equals } from "Function"
+import { complement, equals } from "Function"
+
+import PB from "PartyBus"
 
 import J from "@/Joiners"
-import { log } from "@/Log"
+import { TAGS, log } from "@/Log"
 import S from "@/Splitters"
 
 
@@ -13,12 +15,7 @@ import S from "@/Splitters"
 export type Pair = Pair(Fission, Fusion)
 export type Reversible = Reversible(Pair, Pair)
 
-// interface Reversible a {
-//   validate :: Pair a -> ReversiblePair
-// }
-
-// create :: Reversible a => Fission -> Fusion -> Pair a
-// export create = (fizz, fuse) => Pair($, fizz, fuse)
+export bidi = Reversible
 
 export camel = Pair(S.camel, J.camel)
 export constant = Pair(S.constant, J.constant)
@@ -37,3 +34,26 @@ export train = Pair(S.train, J.train)
 // vs. camel -> space
 // because camel adjusts capitalization,
 // and space doesn't care, it's not 1:1
+
+validInput :: Pair -> String -> Boolean
+export validInput = (p, x) => where(p) {
+  Pair(split, join) =>
+    pipe(
+      S.destructure(split),
+      J.structure(join),
+      PB.bus(PB.confChange((y) => #[x, y], PB.DATED_CONFIG), TAGS.pairsValidate, "validInput"),
+      complement(equals(x)),
+    )(x)
+}
+
+validate :: Reversible -> String -> Boolean
+export validate = (rev, x) => where(rev) {
+  Reversible(Pair(split, join), Pair(split2, join2)) =>
+    pipe(
+      S.destructure(split),
+      J.structure(join2),
+      S.destructure(split2),
+      J.structure(join),
+      equals(x),
+    )(x)
+}

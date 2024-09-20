@@ -1,0 +1,40 @@
+import { report } from "Study"
+
+import {
+  bidi,
+  camel,
+  constant,
+  dot,
+  kebab,
+  pascal,
+  pascalSnake,
+  path,
+  sentence,
+  snake,
+  space,
+  train,
+  validInput,
+  validate,
+} from "@/Pairs"
+
+
+
+report(
+  pipe(
+    bidi($, constant),
+    validate,
+  )(camel),
+  "validate - camel <-> constant",
+  [#["alphaBetaGamma", true], #["", true], #["HEY_THIS_IS_ALREADY_CONSTANT", false]],
+)
+
+report(
+  pipe(
+    bidi($, space),
+    validate,
+  )(camel),
+  "validate - camel <-> space",
+  [#["alphaBetaGamma", true], #["yo yo yo yo", false], #["yo Yo Yo YO", false]],
+)
+
+report(validInput(camel), "validInput - camel", [#["HEY_THIS_IS_ALREADY_CONSTANT", true]])

@@ -8,6 +8,12 @@ import S from "@/Splitters"
 
 
 
+export type Fusion
+export type Pair
+export type Reversible
+export type Fission
+
+
 export structure = J.structure
 export set = {
   camel: J.structure(J.camel),

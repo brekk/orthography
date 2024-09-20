@@ -3,12 +3,16 @@ import { always, ifElse } from "Function"
 import List from "List"
 import { join, toLower, toUpper } from "String"
 
+import PB from "PartyBus"
+
 import { capitalize } from "@/String"
 
 
 
 export type Fusion
   = Fusion(
+    // name
+    String,
     // delimiter
     String,
     // format a
@@ -19,28 +23,33 @@ export type Fusion
 
 structure :: Fusion -> List String -> String
 export structure = (ptrn, strs) => where(#[ptrn, strs]) {
-  #[Fusion(delim, formatA, formatZ), [a, ...z]] =>
-    pipe(
-      ifElse(
-        List.isEmpty,
-        always(""),
-        pipe(
-          map(formatZ),
-          join(delim),
-          mappend(delim),
+  #[Fusion(name, delim, formatA, formatZ), [a, ...z]] =>
+    do {
+      tag = PB.tagWithScope("ortho", ["join", name])
+      return pipe(
+        PB.env(tag, "input"),
+        ifElse(
+          List.isEmpty,
+          always(""),
+          pipe(
+            map(formatZ),
+            join(delim),
+            mappend(delim),
+          ),
         ),
-      ),
-      mappend(formatA(a)),
-    )(z)
+        mappend(formatA(a)),
+        PB.env(tag, "output"),
+      )(z)
+    }
 
   #[_, []] =>
     ""
 }
-
 // ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚ FUSION PATTERNS
 
 
 export camel = Fusion(
+  "camel",
   "",
   toLower,
   pipe(
@@ -49,22 +58,22 @@ export camel = Fusion(
   ),
 )
 
-export sentence = Fusion(" ", capitalize, toLower)
+export sentence = Fusion("sentence", " ", capitalize, toLower)
 
-_apply = (delim, fn) => Fusion(delim, fn, fn)
+_apply = (name, delim, fn) => Fusion(name, delim, fn, fn)
 
-export snake = _apply("_", toLower)
-export constant = _apply("_", toUpper)
+export snake = _apply("snake", "_", toLower)
+export constant = _apply("constant", "_", toUpper)
 
-_joint = _apply($, identity)
-_jointCaps = _apply($, capitalize)
+_joint = _apply($, $, identity)
+_jointCaps = _apply($, $, capitalize)
 
-export space = _joint(" ")
-export dot = _joint(".")
-export kebab = _joint("-")
-export path = _joint("/")
+export space = _joint("space", " ")
+export dot = _joint("dot", ".")
+export kebab = _joint("kebab", "-")
+export path = _joint("path", "/")
 
-export capital = _jointCaps(" ")
-export pascal = _jointCaps("")
-export pascalSnake = _jointCaps("_")
-export train = _jointCaps("-")
+export capital = _jointCaps("capital", " ")
+export pascal = _jointCaps("pascal", "")
+export pascalSnake = _jointCaps("pascalSnake", "_")
+export train = _jointCaps("train", "-")

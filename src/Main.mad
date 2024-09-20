@@ -1,0 +1,13 @@
+import IO from "IO"
+
+import { get, set } from "@/Orthography"
+
+
+
+main = () => {
+  pipe(
+    get.camel,
+    set.constant,
+    IO.pTrace("converted!"),
+  )("alphaBetaGamma")
+}

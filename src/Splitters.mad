@@ -1,10 +1,14 @@
 import { reject } from "List"
 import String from "String"
 
+import PB from "PartyBus"
+
 
 
 export type Fission
   = Fission(
+    // name
+    String,
     // delimiter
     String,
     // breaker
@@ -13,20 +17,25 @@ export type Fission
 
 destructure :: Fission -> String -> List String
 export destructure = (prtn, str) => where(prtn) {
-  Fission(delim, breaker) =>
-    pipe(
-      breaker(delim),
-      reject(String.isEmpty),
-    )(str)
+  Fission(name, delim, breaker) =>
+    do {
+      tag = PB.tagWithScope("ortho", ["split", name])
+      return pipe(
+        PB.env(tag, "input"),
+        breaker(delim),
+        reject(String.isEmpty),
+        PB.env(tag, "output"),
+      )(str)
+    }
 }
 
 // ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚ FISSILE PATTERNS
 
-_split = Fission($, String.split)
+_split = Fission($, $, String.split)
 
 
-export space = _split(" ")
-export sentence = space
+export space = _split("space", " ")
+export sentence = _split("sentence", " ")
 
 _splitCapitals = (d, xs) => pipe(
   String.replace("([A-Z])", `${d}$1`),
@@ -34,16 +43,16 @@ _splitCapitals = (d, xs) => pipe(
   String.split(d),
 )(xs)
 
-export camel = Fission(" ", _splitCapitals)
-export pascal = camel
-export pascalSnake = Fission("_", _splitCapitals)
+export camel = Fission("camel", " ", _splitCapitals)
+export pascal = Fission("pascal", " ", _splitCapitals)
+export pascalSnake = Fission("pascalSnake", "_", _splitCapitals)
 
-export snake = _split("_")
-export constant = snake
+export snake = _split("snake", "_")
+export constant = _split("constant", "_")
 
-export path = _split("/")
+export path = _split("path", "/")
 
-export dot = _split(".")
+export dot = _split("dot", ".")
 
-export kebab = _split("-")
-export train = kebab
+export kebab = _split("kebab", "-")
+export train = _split("train", "-")
