@@ -31,3 +31,9 @@ export sentence = Pair(S.sentence, J.sentence)
 export snake = Pair(S.snake, J.snake)
 export space = Pair(S.space, J.space)
 export train = Pair(S.train, J.train)
+
+// we need to write a validator,
+// consider space -> camel
+// vs. camel -> space
+// because camel adjusts capitalization,
+// and space doesn't care, it's not 1:1

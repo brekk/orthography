@@ -6,15 +6,60 @@ import P from "@/Pairs"
 
 
 camelConstant = translate(P.Reversible(P.camel, P.constant))
+dotKebab = translate(P.Reversible(P.dot, P.kebab))
+pascalSentence = translate(P.Reversible(P.pascal, P.sentence))
+pascalSnakeTrain = translate(P.Reversible(P.pascalSnake, P.train))
+snakePath = translate(P.Reversible(P.snake, P.path))
+spaceCamel = translate(P.Reversible(P.space, P.camel))
 
 report(
-  camelConstant.translateTo,
+  camelConstant(true),
   "translate - camel to constant",
   [#["alphaBetaGamma", "ALPHA_BETA_GAMMA"], #["", ""]],
 )
 
 report(
-  camelConstant.translateFrom,
+  camelConstant(false),
   "translate - constant to camel",
   [#["ALPHA_BETA_GAMMA", "alphaBetaGamma"], #["", ""]],
 )
+
+report(dotKebab(true), "translate - dot to kebab", [#["what.the.hell", "what-the-hell"], #["", ""]])
+
+report(
+  dotKebab(false),
+  "translate - kebab to dot",
+  [#["what-the-hell", "what.the.hell"], #["", ""]],
+)
+
+report(
+  pascalSentence(true),
+  "translate - pascalToSentence",
+  [#["MoonUnitAlpha", "Moon unit alpha"], #["", ""]],
+)
+
+report(
+  pascalSentence(false),
+  "translate - sentence to pascal",
+  [#["Moon unit alpha", "MoonUnitAlpha"], #["", ""]],
+)
+
+report(
+  pascalSnakeTrain(true),
+  "translate - pascalSnake to train",
+  [#["Always_Be_Closing", "Always-Be-Closing"], #["", ""]],
+)
+
+report(
+  pascalSnakeTrain(false),
+  "translate - train to pascalSnake",
+  [#["Always-be-closing", "Always_Be_Closing"], #["", ""]],
+)
+
+
+report(snakePath(true), "translate - snake to path", [#["a_b_c", "a/b/c"], #["", ""]])
+
+report(snakePath(false), "translate - path to snake", [#["a/b/c", "a_b_c"], #["", ""]])
+
+report(spaceCamel(true), "translate - space to camel", [#["yo yo yo yo", "yoYoYoYo"], #["", ""]])
+report(spaceCamel(false), "translate - space to camel", [#["yoYoYoYo", "yo Yo Yo Yo"], #["", ""]])

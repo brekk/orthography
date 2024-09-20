@@ -45,8 +45,8 @@ export convert = (split, join, x) => pipe(
 
 export alias Translation = { translateFrom :: String -> String, translateTo :: String -> String }
 
-translate :: Reversible -> Translation
-export translate = (t) => where(t) {
+translate :: Reversible -> Boolean -> String -> String
+export translate = (t, dir, x) => where(t) {
   Reversible(Pair(aSplit, aJoin), Pair(bSplit, bJoin)) =>
-    ({ translateTo: convert(aSplit, bJoin), translateFrom: convert(bSplit, aJoin) })
+    (dir ? convert(aSplit, bJoin) : convert(bSplit, aJoin))(x)
 }
