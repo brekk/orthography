@@ -1,16 +1,27 @@
 import { caseN2, report } from "Study"
 
-import { translate } from "@/Orthography"
-import P from "@/Pairs"
+import J from "@/Joiners"
+import {
+  Pair,
+  Reversible,
+  bidi,
+  get,
+  pairs,
+  set,
+  translate,
+  validInput,
+  validatePair,
+} from "@/Orthography"
+import S from "@/Splitters"
 
 
 
-camelConstant = translate(P.Reversible(P.camel, P.constant))
-dotKebab = translate(P.Reversible(P.dot, P.kebab))
-pascalSentence = translate(P.Reversible(P.pascal, P.sentence))
-pascalSnakeTrain = translate(P.Reversible(P.pascalSnake, P.train))
-snakePath = translate(P.Reversible(P.snake, P.path))
-spaceCamel = translate(P.Reversible(P.space, P.camel))
+camelConstant = translate(Reversible(Pair(S.camel, J.camel), pairs.constant))
+dotKebab = translate(bidi(pairs.dot, pairs.kebab))
+pascalSentence = translate(bidi(pairs.pascal, pairs.sentence))
+pascalSnakeTrain = translate(bidi(pairs.pascalSnake, pairs.train))
+snakePath = translate(bidi(pairs.snake, pairs.path))
+spaceCamel = translate(bidi(pairs.space, pairs.camel))
 
 report(
   camelConstant(true),
@@ -63,3 +74,16 @@ report(snakePath(false), "translate - path to snake", [#["a/b/c", "a_b_c"], #[""
 
 report(spaceCamel(true), "translate - space to camel", [#["yo yo yo yo", "yoYoYoYo"], #["", ""]])
 report(spaceCamel(false), "translate - space to camel", [#["yoYoYoYo", "yo Yo Yo Yo"], #["", ""]])
+
+report(validInput(pairs.camel), "validInput", [#["coolCoolCool", false]])
+
+report(validatePair(bidi(pairs.camel, pairs.constant)), "validatePair", [#["WHAT_IS_THIS", false]])
+
+report(
+  pipe(
+    get.camel,
+    set.constant,
+  ),
+  "get / set directly",
+  [#["heyHowAreYou", "HEY_HOW_ARE_YOU"]],
+)

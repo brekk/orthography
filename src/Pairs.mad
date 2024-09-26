@@ -29,12 +29,6 @@ export snake = Pair(S.snake, J.snake)
 export space = Pair(S.space, J.space)
 export train = Pair(S.train, J.train)
 
-// we need to write a validator,
-// consider space -> camel
-// vs. camel -> space
-// because camel adjusts capitalization,
-// and space doesn't care, it's not 1:1
-
 validInput :: Pair -> String -> Boolean
 export validInput = (p, x) => where(p) {
   Pair(split, join) =>
@@ -49,11 +43,20 @@ export validInput = (p, x) => where(p) {
 validate :: Reversible -> String -> Boolean
 export validate = (rev, x) => where(rev) {
   Reversible(Pair(split, join), Pair(split2, join2)) =>
-    pipe(
-      S.destructure(split),
-      J.structure(join2),
-      S.destructure(split2),
-      J.structure(join),
-      equals(x),
-    )(x)
+    where(#[split, join, split2, join2]) {
+      #[
+        S.Fission(splitName, _, _),
+        J.Fusion(joinName, _, _, _),
+        S.Fission(split2Name, _, _),
+        J.Fusion(join2Name, _, _, _),
+      ] =>
+        pipe(
+          S.destructure(split),
+          J.structure(join2),
+          S.destructure(split2),
+          J.structure(join),
+          equals(x),
+          log.pairsValidate(`${splitName} -> ${join2Name} -> ${split2Name} -> ${joinName}`),
+        )(x)
+    }
 }

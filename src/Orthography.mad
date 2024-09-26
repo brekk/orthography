@@ -3,15 +3,36 @@ import type { Pair, Reversible } from "@/Pairs"
 import type { Fission } from "@/Splitters"
 
 import J from "@/Joiners"
-import { Pair, Reversible } from "@/Pairs"
+import P from "@/Pairs"
 import S from "@/Splitters"
 
 
+
+export Pair = P.Pair
+export Reversible = P.Reversible
+export bidi = P.bidi
 
 export type Fusion
 export type Pair
 export type Reversible
 export type Fission
+
+export pairs = {
+  camel: P.camel,
+  constant: P.constant,
+  dot: P.dot,
+  kebab: P.kebab,
+  pascal: P.pascal,
+  pascalSnake: P.pascalSnake,
+  path: P.path,
+  sentence: P.sentence,
+  snake: P.snake,
+  space: P.space,
+  train: P.train,
+}
+
+export validInput = P.validInput
+export validatePair = P.validate
 
 
 export structure = J.structure
@@ -49,10 +70,8 @@ export convert = (split, join, x) => pipe(
   structure(join),
 )(x)
 
-export alias Translation = { translateFrom :: String -> String, translateTo :: String -> String }
-
 translate :: Reversible -> Boolean -> String -> String
 export translate = (t, dir, x) => where(t) {
-  Reversible(Pair(aSplit, aJoin), Pair(bSplit, bJoin)) =>
+  P.Reversible(P.Pair(aSplit, aJoin), P.Pair(bSplit, bJoin)) =>
     (dir ? convert(aSplit, bJoin) : convert(bSplit, aJoin))(x)
 }
