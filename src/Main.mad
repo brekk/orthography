@@ -9,5 +9,5 @@ main = () => {
     get.camel,
     set.constant,
     IO.pTrace("converted!"),
-  )("alphaBetaGamma")
+  )("omegaMegaSuperUltra")
 }
