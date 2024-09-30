@@ -37,15 +37,15 @@ _split = Fission($, $, String.split)
 export space = _split("space", " ")
 export sentence = _split("sentence", " ")
 
-_splitCapitals = (d, xs) => pipe(
+export splitCapitals = (d, xs) => pipe(
   String.replace("([A-Z])", `${d}$1`),
   String.trim,
   String.split(d),
 )(xs)
 
-export camel = Fission("camel", " ", _splitCapitals)
-export pascal = Fission("pascal", " ", _splitCapitals)
-export pascalSnake = Fission("pascalSnake", "_", _splitCapitals)
+export camel = Fission("camel", " ", splitCapitals)
+export pascal = Fission("pascal", " ", splitCapitals)
+export pascalSnake = Fission("pascalSnake", "_", splitCapitals)
 
 export snake = _split("snake", "_")
 export constant = _split("constant", "_")
