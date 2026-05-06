@@ -1,7 +1,9 @@
 import { reject } from "List"
 import String from "String"
 
-import PB from "PartyBus"
+
+
+// import PB from "PartyBus"
 
 
 
@@ -19,12 +21,12 @@ destructure :: Fission -> String -> List String
 export destructure = (prtn, str) => where(prtn) {
   Fission(name, delim, breaker) =>
     do {
-      tag = PB.tagWithScope("ortho", ["split", name])
+      // tag = PB.tagWithScope("ortho", ["split", name])
       return pipe(
-        PB.env(tag, "input"),
+        // PB.env(tag, "input"),
         breaker(delim),
         reject(String.isEmpty),
-        PB.env(tag, "output"),
+        // PB.env(tag, "output"),
       )(str)
     }
 }

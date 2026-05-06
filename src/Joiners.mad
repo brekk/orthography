@@ -3,9 +3,11 @@ import { always, ifElse } from "Function"
 import List from "List"
 import { join, toLower, toUpper } from "String"
 
-import PB from "PartyBus"
+// import PB from "PartyBus"
 
-import { capitalize } from "@/String"
+import {
+  capitalize,
+} from "@/String"
 
 
 
@@ -25,9 +27,9 @@ structure :: Fusion -> List String -> String
 export structure = (ptrn, strs) => where(#[ptrn, strs]) {
   #[Fusion(name, delim, formatA, formatZ), [a, ...z]] =>
     do {
-      tag = PB.tagWithScope("ortho", ["join", name])
+      // tag = PB.tagWithScope("ortho", ["join", name])
       return pipe(
-        PB.env(tag, "input"),
+        // PB.env(tag, "input"),
         ifElse(
           List.isEmpty,
           always(""),
@@ -38,7 +40,7 @@ export structure = (ptrn, strs) => where(#[ptrn, strs]) {
           ),
         ),
         mappend(formatA(a)),
-        PB.env(tag, "output"),
+        // PB.env(tag, "output"),
       )(z)
     }
 

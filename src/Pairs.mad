@@ -3,10 +3,10 @@ import type { Fission } from "@/Splitters"
 
 import { complement, equals } from "Function"
 
-import PB from "PartyBus"
+// import PB from "PartyBus"
 
 import J from "@/Joiners"
-import { TAGS, log } from "@/Log"
+// import { TAGS } from "@/Log"
 import S from "@/Splitters"
 
 
@@ -35,7 +35,7 @@ export validInput = (p, x) => where(p) {
     pipe(
       S.destructure(split),
       J.structure(join),
-      PB.bus(PB.confChange((y) => #[x, y], PB.DATED_CONFIG), TAGS.pairsValidate, "validInput"),
+      /* PB.bus(PB.confChange((y) => #[x, y], PB.DATED_CONFIG), TAGS.pairsValidate, "validInput"), */
       complement(equals(x)),
     )(x)
 }
@@ -56,7 +56,7 @@ export validate = (rev, x) => where(rev) {
           S.destructure(split2),
           J.structure(join),
           equals(x),
-          log.pairsValidate(`${splitName} -> ${join2Name} -> ${split2Name} -> ${joinName}`),
+          /* log.pairsValidate(`${splitName} -> ${join2Name} -> ${split2Name} -> ${joinName}`), */
         )(x)
     }
 }
