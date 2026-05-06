@@ -1,22 +1,20 @@
 {
   "name": "orthography",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "main": "src/Orthography.mad",
   "importAliases": {
     ".": "src"
   },
   "dependencies": [
     {
+      "minVersion": "0.0.4",
       "url": "https://github.com/brekk/study/archive/refs/tags/v0.0.4.zip",
-      "name": "Study",
-      "description": "testing tools for besting fools",
-      "minVersion": "0.0.4"
+      "description": "testing tools for besting fools"
     },
     {
+      "minVersion": "0.0.8",
       "url": "https://github.com/brekk/party-bus/archive/refs/tags/v0.0.8.zip",
-      "name": "PartyBus",
-      "description": "conditional logging",
-      "minVersion": "0.0.8"
+      "description": "conditional logging"
     }
   ]
 }

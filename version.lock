@@ -1,0 +1,156 @@
+{
+  "buildHash": "8a856d794ad419760dd0b3d656ab0c9a",
+  "jsApi": {
+    "apiInstances": [],
+    "apiAliases": {},
+    "apiInterfaces": {},
+    "apiNames": {
+      "src/Splitters.mad#pascal": "Fission",
+      "src/Joiners.mad#pascal": "Fusion",
+      "src/Joiners.mad#structure": "Fusion -> List String -> String",
+      "src/Joiners.mad#space": "Fusion",
+      "src/Pairs.mad#validate": "Reversible -> String -> Boolean",
+      "src/Pairs.mad#constant": "Pair",
+      "src/Pairs.mad#pascal": "Pair",
+      "convert": "Fission -> Fusion -> String -> String",
+      "src/Splitters.mad#kebab": "Fission",
+      "src/Joiners.mad#dot": "Fusion",
+      "src/Pairs.mad#train": "Pair",
+      "src/Joiners.mad#train": "Fusion",
+      "Reversible": "Pair -> Pair -> Reversible",
+      "src/Splitters.mad#destructure": "Fission -> String -> List String",
+      "destructure": "Fission -> String -> List String",
+      "src/Splitters.mad#snake": "Fission",
+      "src/Splitters.mad#dot": "Fission",
+      "src/Splitters.mad#space": "Fission",
+      "src/Splitters.mad#splitCapitals": "String -> String -> List String",
+      "src/Splitters.mad#camel": "Fission",
+      "pairs": "{ camel :: Pair, constant :: Pair, dot :: Pair, kebab :: Pair, pascal :: Pair, pascalSnake :: Pair, path :: Pair, sentence :: Pair, snake :: Pair, space :: Pair, train :: Pair }",
+      "validInput": "Pair -> String -> Boolean",
+      "bidi": "Pair -> Pair -> Reversible",
+      "src/Joiners.mad#kebab": "Fusion",
+      "src/Pairs.mad#kebab": "Pair",
+      "src/Splitters.mad#train": "Fission",
+      "src/Joiners.mad#snake": "Fusion",
+      "src/Joiners.mad#sentence": "Fusion",
+      "validatePair": "Reversible -> String -> Boolean",
+      "src/Pairs.mad#bidi": "Pair -> Pair -> Reversible",
+      "Pair": "Fission -> Fusion -> Pair",
+      "src/Splitters.mad#constant": "Fission",
+      "src/String.mad#sliceToEnd": "Integer -> String -> String",
+      "src/Pairs.mad#path": "Pair",
+      "src/Joiners.mad#camel": "Fusion",
+      "src/Pairs.mad#validInput": "Pair -> String -> Boolean",
+      "src/Joiners.mad#capital": "Fusion",
+      "src/Pairs.mad#dot": "Pair",
+      "src/Pairs.mad#sentence": "Pair",
+      "src/String.mad#capitalize": "String -> String",
+      "src/Pairs.mad#camel": "Pair",
+      "src/String.mad#uncapitalize": "String -> String",
+      "set": "{ camel :: List String -> String, capital :: List String -> String, constant :: List String -> String, dot :: List String -> String, kebab :: List String -> String, pascal :: List String -> String, pascalSnake :: List String -> String, path :: List String -> String, sentence :: List String -> String, snake :: List String -> String, train :: List String -> String }",
+      "src/Pairs.mad#space": "Pair",
+      "translate": "Reversible -> Boolean -> String -> String",
+      "src/Splitters.mad#path": "Fission",
+      "src/Joiners.mad#pascalSnake": "Fusion",
+      "src/Splitters.mad#sentence": "Fission",
+      "structure": "Fusion -> List String -> String",
+      "src/Pairs.mad#snake": "Pair",
+      "get": "{ camel :: String -> List String, constant :: String -> List String, dot :: String -> List String, kebab :: String -> List String, pascal :: String -> List String, path :: String -> List String, sentence :: String -> List String, snake :: String -> List String, space :: String -> List String, train :: String -> List String }",
+      "src/Joiners.mad#path": "Fusion",
+      "src/Splitters.mad#pascalSnake": "Fission",
+      "src/Pairs.mad#pascalSnake": "Pair",
+      "src/Joiners.mad#constant": "Fusion"
+    },
+    "apiTypes": {
+      "src/Pairs.mad#Reversible": [
+        "Reversible Pair Pair"
+      ],
+      "src/Joiners.mad#Fusion": [
+        "Fusion String String (String -> String) (String -> String)"
+      ],
+      "src/Splitters.mad#Fission": [
+        "Fission String String (String -> String -> List String)"
+      ],
+      "src/Pairs.mad#Pair": [
+        "Pair Fission Fusion"
+      ]
+    }
+  },
+  "llvmApi": {
+    "apiInstances": [],
+    "apiAliases": {},
+    "apiInterfaces": {},
+    "apiNames": {
+      "src/Splitters.mad#pascal": "Fission",
+      "src/Joiners.mad#pascal": "Fusion",
+      "src/Joiners.mad#structure": "Fusion -> List String -> String",
+      "src/Joiners.mad#space": "Fusion",
+      "src/Pairs.mad#validate": "Reversible -> String -> Boolean",
+      "src/Pairs.mad#constant": "Pair",
+      "src/Pairs.mad#pascal": "Pair",
+      "convert": "Fission -> Fusion -> String -> String",
+      "src/Splitters.mad#kebab": "Fission",
+      "src/Joiners.mad#dot": "Fusion",
+      "src/Pairs.mad#train": "Pair",
+      "src/Joiners.mad#train": "Fusion",
+      "Reversible": "Pair -> Pair -> Reversible",
+      "src/Splitters.mad#destructure": "Fission -> String -> List String",
+      "destructure": "Fission -> String -> List String",
+      "src/Splitters.mad#snake": "Fission",
+      "src/Splitters.mad#dot": "Fission",
+      "src/Splitters.mad#space": "Fission",
+      "src/Splitters.mad#splitCapitals": "String -> String -> List String",
+      "src/Splitters.mad#camel": "Fission",
+      "pairs": "{ camel :: Pair, constant :: Pair, dot :: Pair, kebab :: Pair, pascal :: Pair, pascalSnake :: Pair, path :: Pair, sentence :: Pair, snake :: Pair, space :: Pair, train :: Pair }",
+      "validInput": "Pair -> String -> Boolean",
+      "bidi": "Pair -> Pair -> Reversible",
+      "src/Joiners.mad#kebab": "Fusion",
+      "src/Pairs.mad#kebab": "Pair",
+      "src/Splitters.mad#train": "Fission",
+      "src/Joiners.mad#snake": "Fusion",
+      "src/Joiners.mad#sentence": "Fusion",
+      "validatePair": "Reversible -> String -> Boolean",
+      "src/Pairs.mad#bidi": "Pair -> Pair -> Reversible",
+      "Pair": "Fission -> Fusion -> Pair",
+      "src/Splitters.mad#constant": "Fission",
+      "src/String.mad#sliceToEnd": "Integer -> String -> String",
+      "src/Pairs.mad#path": "Pair",
+      "src/Joiners.mad#camel": "Fusion",
+      "src/Pairs.mad#validInput": "Pair -> String -> Boolean",
+      "src/Joiners.mad#capital": "Fusion",
+      "src/Pairs.mad#dot": "Pair",
+      "src/Pairs.mad#sentence": "Pair",
+      "src/String.mad#capitalize": "String -> String",
+      "src/Pairs.mad#camel": "Pair",
+      "src/String.mad#uncapitalize": "String -> String",
+      "set": "{ camel :: List String -> String, capital :: List String -> String, constant :: List String -> String, dot :: List String -> String, kebab :: List String -> String, pascal :: List String -> String, pascalSnake :: List String -> String, path :: List String -> String, sentence :: List String -> String, snake :: List String -> String, train :: List String -> String }",
+      "src/Pairs.mad#space": "Pair",
+      "translate": "Reversible -> Boolean -> String -> String",
+      "src/Splitters.mad#path": "Fission",
+      "src/Joiners.mad#pascalSnake": "Fusion",
+      "src/Splitters.mad#sentence": "Fission",
+      "structure": "Fusion -> List String -> String",
+      "src/Pairs.mad#snake": "Pair",
+      "get": "{ camel :: String -> List String, constant :: String -> List String, dot :: String -> List String, kebab :: String -> List String, pascal :: String -> List String, path :: String -> List String, sentence :: String -> List String, snake :: String -> List String, space :: String -> List String, train :: String -> List String }",
+      "src/Joiners.mad#path": "Fusion",
+      "src/Splitters.mad#pascalSnake": "Fission",
+      "src/Pairs.mad#pascalSnake": "Pair",
+      "src/Joiners.mad#constant": "Fusion"
+    },
+    "apiTypes": {
+      "src/Pairs.mad#Reversible": [
+        "Reversible Pair Pair"
+      ],
+      "src/Joiners.mad#Fusion": [
+        "Fusion String String (String -> String) (String -> String)"
+      ],
+      "src/Splitters.mad#Fission": [
+        "Fission String String (String -> String -> List String)"
+      ],
+      "src/Pairs.mad#Pair": [
+        "Pair Fission Fusion"
+      ]
+    }
+  },
+  "versionHash": "25e64aa754c310d45c1e084d574c1bb0"
+}
