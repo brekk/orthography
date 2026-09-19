@@ -1,19 +1,32 @@
-import PB from "PartyBus"
+/* ★★★ orthography@0.0.7 ★★★
+ * THIS FILE AUTOMATICALLY GENERATED FROM SOURCE: orthography.clown-car
+ */
+
+import Party from "PartyBus"
 
 
 
-export TAGS = {
-  pairs: PB.tagWithScope("ortho", ["pairs"]),
-  pairsValidate: PB.tagWithScope("ortho", ["pairs", "validate"]),
-  convert: PB.tagWithScope("ortho", ["convert"]),
-  info: PB.tagWithScope("ortho", ["info"]),
-  detail: PB.tagWithScope("ortho", ["detail"]),
+export tags = {
+  orthography: Party.tag("orthography"),
+  pairs: Party.tagWithScope("orthography", ["pairs"]),
+  pairsValidate: Party.tagWithScope("orthography", ["pairs", "validate"]),
+  convert: Party.tagWithScope("orthography", ["convert"]),
+  info: Party.tagWithScope("orthography", ["info"]),
+  detail: Party.tagWithScope("orthography", ["detail"]),
 }
-
-export log = {
-  pairs: PB.env(TAGS.pairs),
-  pairsValidate: PB.env(TAGS.pairsValidate),
-  convert: PB.env(TAGS.convert),
-  info: PB.env(TAGS.info),
-  detail: PB.env(TAGS.detail),
+export env = {
+  orthography: Party.env(tags.orthography),
+  pairs: Party.env(tags.pairs),
+  pairsValidate: Party.env(tags.pairsValidate),
+  convert: Party.env(tags.convert),
+  info: Party.env(tags.info),
+  detail: Party.env(tags.detail),
+}
+export tapped = {
+  orthography: Party.tap(env.orthography),
+  pairs: Party.tap(env.pairs),
+  pairsValidate: Party.tap(env.pairsValidate),
+  convert: Party.tap(env.convert),
+  info: Party.tap(env.info),
+  detail: Party.tap(env.detail),
 }

@@ -1,6 +1,6 @@
 {
   "name": "orthography",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "main": "src/Orthography.mad",
   "importAliases": {
     ".": "src"
@@ -12,8 +12,8 @@
       "description": "testing tools for besting fools"
     },
     {
-      "minVersion": "0.1.2",
-      "url": "https://github.com/brekk/party-bus/archive/refs/tags/v0.1.2.zip",
+      "minVersion": "0.2.2",
+      "url": "https://github.com/brekk/party-bus/archive/refs/tags/v0.2.2.zip",
       "description": "conditional logging"
     }
   ]
